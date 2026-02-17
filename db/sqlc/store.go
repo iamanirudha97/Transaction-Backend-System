@@ -48,8 +48,8 @@ type TransferTxParams struct {
 
 type TransferTxResult struct {
 	Transfer    Transfer `json:"transfer"`
-	FromAccount int64    `json:"from_account_id"`
-	ToAccount   int64    `json:"to_account_id"`
+	FromAccount Account  `json:"from_account_id"`
+	ToAccount   Account  `json:"to_account_id"`
 	Amount      int64    `json:"amount"`
 	FromEntry   Entry    `json:"from_entry"`
 	ToEntry     Entry    `json:"to_entry"`
@@ -86,7 +86,25 @@ func (store *Store) TransferTx(ctx context.Context, arg TransferTxParams) (Trans
 			return err
 		}
 
-		// TODO : update account's balance, involves deadlock conditions
+		//update account's balance
+		//get account, update its balance, but carefully implement proper locking mechanism
+
+		result.FromAccount, err = q.AddAccountBalance(ctx, AddAccountBalanceParams{
+			ID:     arg.FromAccountID,
+			Amount: -arg.Amount,
+		})
+		if err != nil {
+			return err
+		}
+
+		//updating receiver or credit account
+		result.ToAccount, err = q.AddAccountBalance(ctx, AddAccountBalanceParams{
+			ID:     arg.ToAccountID,
+			Amount: arg.Amount,
+		})
+		if err != nil {
+			return err
+		}
 
 		return nil
 	})
