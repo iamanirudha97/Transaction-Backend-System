@@ -34,7 +34,7 @@ func TestCreateAccount(t *testing.T) {
 	createRandomAccount(t)
 }
 
-func TestGetAcount(t *testing.T) {
+func TestGetAccount(t *testing.T) {
 	randomAccount := createRandomAccount(t)
 	account, err := testQueries.GetAccount(context.Background(), randomAccount.ID)
 
