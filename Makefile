@@ -22,4 +22,7 @@ test:
 server:
 	go run main.go
 
+dev: 
+	air
+
 .PHONY: postgres createdb dropdb migrateup migratedown sqlc test server 
