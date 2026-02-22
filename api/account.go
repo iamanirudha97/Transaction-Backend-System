@@ -56,7 +56,7 @@ func (server *Server) getAccount(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(http.StatusFound, account)
+	ctx.JSON(http.StatusOK, account)
 }
 
 // pagination api call

@@ -32,3 +32,7 @@ func RandomCurrency() string {
 	n := len(currencies)
 	return currencies[rand.Intn(n)]
 }
+
+func RandomOwner() string {
+	return RandomString(6)
+}

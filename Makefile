@@ -19,10 +19,17 @@ sqlc:
 test:
 	go test -v -cover ./...
 
+test-api:
+	go test -v ./api -run .
+
 server:
 	go run main.go
 
 dev: 
 	air
 
-.PHONY: postgres createdb dropdb migrateup migratedown sqlc test server 
+mock: 
+	mockgen -package mockdb -destination db/mock/store.go github.com/anirudha/Transaction-Backend-System/db/sqlc Store
+
+
+.PHONY: postgres createdb dropdb migrateup migratedown sqlc test test-api server mock
