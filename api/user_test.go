@@ -212,7 +212,7 @@ func TestRegisterUserAPI(t *testing.T) {
 			testcase.buildStubs(store)
 
 			// start mock server and test the request
-			server := NewServer(store)
+			server := newTestServer(t, store)
 			recorder := httptest.NewRecorder()
 
 			//marshal the body data to JSON
