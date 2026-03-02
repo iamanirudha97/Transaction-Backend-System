@@ -153,6 +153,7 @@ func TestGetAccountAPI(t *testing.T) {
 			name:      "NoAuthorization",
 			accountID: account.ID,
 			setupAuth: func(t *testing.T, request *http.Request, tokenMaker token.Maker) {
+				// Intentionally empty: no Authorization header so auth middleware returns 401.
 			},
 			buildStubs: func(store *mockdb.MockStore) {
 				store.EXPECT().
@@ -235,6 +236,7 @@ func TestCreateAccountAPI(t *testing.T) {
 				"currency": account.Currency,
 			},
 			setupAuth: func(t *testing.T, request *http.Request, tokenMaker token.Maker) {
+				// Intentionally empty: no Authorization header so auth middleware returns 401.
 			},
 			buildStubs: func(store *mockdb.MockStore) {
 				store.EXPECT().
@@ -382,6 +384,7 @@ func TestListAccountsAPI(t *testing.T) {
 				pageSize: n,
 			},
 			setupAuth: func(t *testing.T, request *http.Request, tokenMaker token.Maker) {
+				// Intentionally empty: no Authorization header so auth middleware returns 401.
 			},
 			buildStubs: func(store *mockdb.MockStore) {
 				store.EXPECT().
