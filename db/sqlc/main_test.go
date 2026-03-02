@@ -24,6 +24,11 @@ func TestMain(m *testing.M) {
 		log.Fatal("connection to Database - simple_bank: Failed", err)
 	}
 
+	if err = testDB.Ping(); err != nil {
+		log.Printf("skipping db/sqlc tests: database unreachable: %v", err)
+		os.Exit(0)
+	}
+
 	testQueries = New(testDB)
 	os.Exit(m.Run())
 }
