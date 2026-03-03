@@ -29,10 +29,10 @@ jobs:
     steps:
       - name: Check out code into the Go module directory
         uses: actions/checkout@v5
-      - name: Set up Go 1.x
+      - name: Set up Go 1.24
         uses: actions/setup-go@v2
         with:
-          go-version: 1.22
+          go-version: 1.24
         # id: go (The id field is used to reference a step's output later.)
       
       - name: Install Golang-Migrate tool
