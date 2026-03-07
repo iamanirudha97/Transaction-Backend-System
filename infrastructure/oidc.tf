@@ -5,7 +5,7 @@ resource "aws_iam_openid_connect_provider" "github" {
 }
 
 resource "aws_iam_role" "github_oidc_role" {
-  name = "github-actions-ecr-role"
+  name = var.oidc_config.role_name
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -18,7 +18,7 @@ resource "aws_iam_role" "github_oidc_role" {
         },
         Condition = {
           StringLike = {
-            "token.actions.githubusercontent.com:sub" : "repo:iamanirudha97/Transaction-Backend-System:ref:refs/heads/main"
+            "token.actions.githubusercontent.com:sub" : "repo:${var.oidc_config.repo}:${var.oidc_config.repo_ref}"
           }
         }
       }
@@ -29,7 +29,7 @@ resource "aws_iam_role" "github_oidc_role" {
 # 3. Attach ECR permissions
 resource "aws_iam_role_policy_attachment" "ecr_attach" {
   role       = aws_iam_role.github_oidc_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess"
+  policy_arn = var.oidc_config.policy_arn
 }
 
 output "github_actions_role_arn" {
