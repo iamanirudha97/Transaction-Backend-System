@@ -1,8 +1,6 @@
-name: ci-test
+name: Run unit tests
 
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
 
@@ -17,7 +15,6 @@ jobs:
             POSTGRES_USER: root
             POSTGRES_PASSWORD: secret
             POSTGRES_DB: simple_bank
-          # Set health checks to wait until postgres has started
           options: >-
             --health-cmd pg_isready
             --health-interval 10s
