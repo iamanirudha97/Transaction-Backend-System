@@ -8,10 +8,16 @@ jobs:
   test:
     name: Build docker image
     runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read 
     
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+
+      
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
