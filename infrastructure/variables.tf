@@ -5,12 +5,12 @@ variable "aws_region" {
 }
 
 variable "ecr_config" {
-type = object({
-    name = string
-    tag_mutable = string
+  type = object({
+    name         = string
+    tag_mutable  = string
     force_delete = bool
     scan_on_push = bool
-  }) 
+  })
   description = "AWS ECR Config"
 }
 
