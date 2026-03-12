@@ -6,4 +6,3 @@ resource "aws_ecr_repository" "transaction_system" {
     scan_on_push = var.ecr_config.scan_on_push
   }
 }
-

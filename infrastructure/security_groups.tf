@@ -1,14 +1,13 @@
-
 resource "aws_security_group" "rds_public" {
-  name   = "rds-public-postgres-sg"
+  name   = var.rds_security_group_config.name
   vpc_id = aws_default_vpc.default.id
 
   ingress {
     description = "PostgreSQL access"
-    from_port   = 5432
-    to_port     = 5432
+    from_port   = var.rds_security_group_config.ingress_port
+    to_port     = var.rds_security_group_config.ingress_port
     protocol    = "tcp"
-    cidr_blocks = ["66.30.245.51/32"]
+    cidr_blocks = var.rds_security_group_config.allowed_cidrs
   }
 
   egress {
