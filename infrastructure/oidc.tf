@@ -31,7 +31,3 @@ resource "aws_iam_role_policy_attachment" "ecr_attach" {
   role       = aws_iam_role.github_oidc_role.name
   policy_arn = var.oidc_config.policy_arn
 }
-
-output "github_actions_role_arn" {
-  value = aws_iam_role.github_oidc_role.arn
-}
